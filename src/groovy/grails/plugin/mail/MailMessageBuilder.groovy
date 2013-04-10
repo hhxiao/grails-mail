@@ -351,6 +351,9 @@ class MailMessageBuilder {
             helper.addAttachment(MimeUtility.encodeWord(id), toAdd, contentType)
         } else {
             helper.addInline(MimeUtility.encodeWord(id), toAdd, contentType)
+            // File name support for mail client: Outlook on MacOS, etc ...
+            def bodyPart = helper.getMimeMultipart().getBodyPart(helper.getMimeMultipart().getCount() - 1)
+            if(bodyPart) bodyPart.setFileName(id)
         }
     }
 
