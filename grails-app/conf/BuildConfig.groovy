@@ -1,5 +1,9 @@
+grails.project.repos.grailsCentral.username = System.getenv("GRAILS_CENTRAL_USERNAME")
+grails.project.repos.grailsCentral.password = System.getenv("GRAILS_CENTRAL_PASSWORD")
+
 grails.project.work.dir = "target"
 
+grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
 
     inherits("global")
@@ -11,18 +15,15 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile "javax.mail:mail:1.4.5"
-
-        runtime("org.springframework:spring-test:3.1.0.RELEASE") {
-            transitive = false
-        }
+		compile "javax.mail:javax.mail-api:1.5.1"
+        runtime "com.sun.mail:javax.mail:1.5.1"
     }
 
     plugins {
-        test (":greenmail:1.3.0") {
+        test (":greenmail:1.3.4") {
             export = false
         }
-        build(":release:2.0.4", ":rest-client-builder:1.0.2") {
+        build ":tomcat:7.0.52.1", ':release:3.0.1', ':rest-client-builder:2.0.1', {
             export = false
         }
     }
